@@ -1,6 +1,19 @@
-import {useTranslations} from 'next-intl';
+import Form from '@/components/Form';
+import { getTranslations } from 'next-intl/server';
 
-export default function IndexPage() {
-  const t = useTranslations('IndexPage');
-  return <h1>{t('title')}</h1>;
+export default async function IndexPage({ params: { locale } }: { params: { locale: string } }) {
+  const t = await getTranslations();
+
+  const handleSubmit = async () => {
+    'use server';
+
+    // This code will only run on the server
+  };
+
+  return (
+    <>
+      <h1>{t('IndexPage.title')}</h1>
+      <Form onSubmit={handleSubmit} />
+    </>
+  );
 }
